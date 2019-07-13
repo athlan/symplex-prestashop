@@ -9,6 +9,12 @@
             "email": "me@athlan.pl"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Athlan\\SymplexPrestahop\\": "src/",
+            "Athlan\\SymplexPrestahop\\Test\\": "test/"
+        }
+    },
     "minimum-stability": "stable",
     "require": {}
 }
