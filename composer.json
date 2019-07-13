@@ -1,0 +1,14 @@
+{
+    "name": "athlan/symplex-prestashop",
+    "description": "Symplex shop magazine synchronization with Prestashop",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Piotr Pelczar",
+            "email": "me@athlan.pl"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
