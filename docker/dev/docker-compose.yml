@@ -7,3 +7,25 @@ services:
         volumes:
             - ${APP_PATH}:/app
         working_dir: /app
+    db:
+        image: mysql:5.7
+        environment:
+            MYSQL_DATABASE: prestashop
+            MYSQL_USER: prestashop
+            MYSQL_PASSWORD: prestashop
+            MYSQL_ROOT_PASSWORD: prestashop
+    prestashop:
+        image: prestashop/prestashop:1.7
+        depends_on:
+          - db
+        environment:
+            DB_SERVER: db
+            DB_USER: prestashop
+            DB_PASSWD: prestashop
+            DB_NAME: prestashop
+            DB_PREFIX: ps_
+            PS_DOMAIN: localhost:8080
+            PS_INSTALL_AUTO: 1
+            PS_ERASE_DB: 1
+        ports:
+          - 8080:80
