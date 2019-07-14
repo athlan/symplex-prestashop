@@ -1,0 +1,32 @@
+imports:
+  - { resource: ../config/config.yaml }
+
+parameters:
+  connection:
+    url: '%prestashop_db_url%'
+
+services:
+  _defaults:
+    public: true
+    autowire: true
+
+  Athlan\SymplexPrestahop\Application\SyncPriceAndQty:
+    $productsRepository: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductsRepository'
+    $shopProductsSource: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource'
+
+  Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource:
+
+  Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductsRepository:
+    $connection: '@Doctrine\DBAL\Connection'
+    $prestashopConfiguration: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopConfiguration'
+
+  Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopConfiguration:
+    properties:
+      tablePrefix: '%prestashop_table_prefix%'
+
+  Doctrine\DBAL\Connection:
+    factory: [ Doctrine\DBAL\DriverManager, getConnection ]
+    arguments: ['%connection%', '@Doctrine\DBAL\Configuration']
+
+  Doctrine\DBAL\Configuration:
+

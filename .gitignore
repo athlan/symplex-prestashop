@@ -1,3 +1,6 @@
 /vendor
 /coposer.lock
 /.phpunit*
+
+/config/*
+!/config/*.diff

@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+use Athlan\SymplexPrestahop\Application\Product;
+use Athlan\SymplexPrestahop\Application\SyncPriceAndQty;
+use Athlan\SymplexPrestahop\Application\SyncPriceAndQtyResult;
+
+$container = require __DIR__ . '/../src/Kernel.php';
+
+class Result implements SyncPriceAndQtyResult
+{
+
+    function productSynchronized(Product $product)
+    {
+        echo $product->getEanCode() . " synchronized" . PHP_EOL;
+    }
+
+    function productNotFoundInShop(Product $product)
+    {
+        echo $product->getEanCode() . " not in shop" . PHP_EOL;
+    }
+}
+
+$result = new Result();
+
+/* @var $command SyncPriceAndQty */
+$command = $container->get(SyncPriceAndQty::class);
+$command->sync($argv[1], $result);

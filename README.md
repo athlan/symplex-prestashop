@@ -9,6 +9,21 @@ Tool provides integration of [Symplex Small Busines](http://symplex.com.pl) to [
 
 Note: This is open source product and have no commercial support. Contributions are welcome.
 
+## Usage
+
+Copy `/config/config.yaml.diff` to `/config/config.yaml` and adjust
+
+### List product references from shop
+
+```
+bin/list-shop
+```
+
+### Sync shop with csv file
+```
+bin/sync path/to/symplex/baza.csv
+```
+
 ## Development environment
 
 Development environment is setup by Docker and docker-compose.

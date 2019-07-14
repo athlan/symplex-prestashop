@@ -21,7 +21,7 @@ class SymplexCsvProductSourceTest extends TestCase
         $this->assertGreaterThan(0, count($products),
             'Loads all products');
 
-        $productByEan = $this->thenMapByEan($products);
+        $productByEan = Product::mapByEan($products);
 
         $product = $productByEan['57730004'];
         $this->assertEquals("ZIEMNIAKI MLODE", $product->getName(), 'Maps name');
@@ -38,7 +38,7 @@ class SymplexCsvProductSourceTest extends TestCase
         $products = iterator_to_array($productsStore->productList());
 
         // then
-        $productByEan = $this->thenMapByEan($products);
+        $productByEan = Product::mapByEan($products);
 
         $product = $productByEan['5906734200820'];
         $this->assertEquals("REKLAMÓWKA ECO 100", $product->getName(), 'Maps name');
@@ -49,19 +49,5 @@ class SymplexCsvProductSourceTest extends TestCase
     protected function givenProductStore(string $filePath): ProductsSource
     {
         return new SymplexCsvProductSource($filePath);
-    }
-
-    /**
-     * @param Product[] $products
-     * @return Product[]
-     */
-    protected function thenMapByEan(array $products): array
-    {
-        return array_combine(
-            array_map(function (Product $product) {
-                return $product->getEanCode();
-            }, $products),
-            $products
-        );
     }
 }
