@@ -39,7 +39,7 @@ class SymplexCsvProductSource implements ProductsSource
             $record['v_products_model'],
             $record['v_products_name_2'],
             (float) $record['v_products_price'],
-            (int) $record['v_products_quantity']
+            (float) $record['v_products_quantity']
         );
     }
 }

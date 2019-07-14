@@ -22,11 +22,11 @@ class Product
     private $price;
 
     /**
-     * @var int
+     * @var float
      */
     private $qty;
 
-    public function __construct(string $eanCode, string $name, float $price, int $qty)
+    public function __construct(string $eanCode, string $name, float $price, float $qty)
     {
         $this->eanCode = $eanCode;
         $this->name = $name;
@@ -49,7 +49,7 @@ class Product
         return $this->price;
     }
 
-    public function getQty(): int
+    public function getQty(): float
     {
         return $this->qty;
     }
