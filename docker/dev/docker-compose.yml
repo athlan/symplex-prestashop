@@ -40,7 +40,6 @@ services:
             ADMIN_MAIL: demo@prestashop.com
             ADMIN_PASSWD: prestashop_demo
         volumes:
-            - ./:/var/www/html/:delegated
             - vol_prestashop_vendor:/var/www/html/vendor
             - vol_prestashop_var:/var/www/html/var
         ports:
