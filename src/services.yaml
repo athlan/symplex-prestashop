@@ -1,25 +1,25 @@
+imports:
+  - { resource: ../config/config.yaml }
+
 parameters:
   connection:
-    url: 'mysql://user:secret@localhost/mydb'
-  prestashop_table_prefix: 'ps_'
+    url: '%prestashop_db_url%'
 
 services:
+  _defaults:
+    public: true
+    autowire: true
 
   Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource:
     class: Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource
-    arguments:
-      $connection: '@connection'
-      $prestashopConfiguration: '@prestashop_configuration'
 
-  prestashop_configuration:
-    class: Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopConfiguration
+  Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopConfiguration:
     properties:
       tablePrefix: '%prestashop_table_prefix%'
 
-  connection:
-    class: Doctrine\DBAL\Connection
+  Doctrine\DBAL\Connection:
     factory: [ Doctrine\DBAL\DriverManager, getConnection ]
-    arguments: ['%connection%', '@connection_config']
+    arguments: ['%connection%', '@Doctrine\DBAL\Configuration']
 
-  connection_config:
-    class: Doctrine\DBAL\Configuration
+  Doctrine\DBAL\Configuration:
+

@@ -1,0 +1,3 @@
+parameters:
+  prestashop_db_url: 'mysql://user:secret@localhost/mydb'
+  prestashop_table_prefix: 'ps_'

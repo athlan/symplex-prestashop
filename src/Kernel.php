@@ -11,3 +11,4 @@ require __DIR__ . '/../vendor/autoload.php';
 $container = new ContainerBuilder();
 $loader = new YamlFileLoader($container, new FileLocator(__DIR__));
 $loader->load('services.yaml');
+$container->compile();
