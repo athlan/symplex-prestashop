@@ -5,6 +5,8 @@ Tool provides integration of [Symplex Small Busines](http://symplex.com.pl) to [
 * Synchronize producs prices and quantites by EAN code
 * Report products that coudn't be synced due to missing in Symplex
 
+Note: This is open source product and have no commercial support. Contributions are welcome.
+
 ## Development environment
 
 Development environment is setup by Docker and docker-compose.
