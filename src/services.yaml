@@ -1,0 +1,25 @@
+parameters:
+  connection:
+    url: 'mysql://user:secret@localhost/mydb'
+  prestashop_table_prefix: 'ps_'
+
+services:
+
+  Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource:
+    class: Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource
+    arguments:
+      $connection: '@connection'
+      $prestashopConfiguration: '@prestashop_configuration'
+
+  prestashop_configuration:
+    class: Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopConfiguration
+    properties:
+      tablePrefix: '%prestashop_table_prefix%'
+
+  connection:
+    class: Doctrine\DBAL\Connection
+    factory: [ Doctrine\DBAL\DriverManager, getConnection ]
+    arguments: ['%connection%', '@connection_config']
+
+  connection_config:
+    class: Doctrine\DBAL\Configuration
