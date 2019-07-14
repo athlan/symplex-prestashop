@@ -11,10 +11,19 @@
     ],
     "autoload": {
         "psr-4": {
-            "Athlan\\SymplexPrestahop\\": "src/",
+            "Athlan\\SymplexPrestahop\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Athlan\\SymplexPrestahop\\Test\\": "test/"
         }
     },
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    }
 }
