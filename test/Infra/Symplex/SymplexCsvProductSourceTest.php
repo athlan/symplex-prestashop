@@ -11,14 +11,14 @@ class SymplexCsvProductSourceTest extends TestCase
     public function test_extracts_products_from_file()
     {
         // given
-        $productsStore = $this->givenProductStore('baza.csv');
+        $productsStore = $this->givenProductStore(__DIR__ . '/baza.csv');
 
         // when
-        $products = $productsStore->productList();
+        $products = iterator_to_array($productsStore->productList());
 
         // then
         $this->assertGreaterThan(0, count($products),
-            'Loads products');
+            'Loads all products');
     }
 
     protected function givenProductStore(string $filePath): ProductsSource
