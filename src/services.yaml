@@ -10,8 +10,15 @@ services:
     public: true
     autowire: true
 
+  Athlan\SymplexPrestahop\Application\SyncPriceAndQty:
+    $productsRepository: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductsRepository'
+    $shopProductsSource: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource'
+
   Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource:
-    class: Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource
+
+  Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductsRepository:
+    $connection: '@Doctrine\DBAL\Connection'
+    $prestashopConfiguration: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopConfiguration'
 
   Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopConfiguration:
     properties:

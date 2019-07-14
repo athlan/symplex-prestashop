@@ -1,0 +1,4 @@
+v_products_model	v_products_name_2	v_products_description_2	v_products_name_1	v_products_description_1	v_products_price	v_products_quantity	v_categories_name_1	v_tax_class_title	EOREOR
+demo_1	DEMO_1	KG	DEMO_1	KG	1.99	15	Magazyn  0	VAT5	EOREOR
+demo_3	DEMO_3	SZT	DEMO_3	SZT	0.20	30	Magazyn  0	VAT23	EOREOR
+invalid_1	INVALID_1	SZT	INVALID_1	SZT	0.20	30	Magazyn  0	VAT23	EOREOR

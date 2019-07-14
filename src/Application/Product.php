@@ -53,4 +53,18 @@ class Product
     {
         return $this->qty;
     }
+
+    /**
+     * @param Product[] $products
+     * @return Product[]
+     */
+    public static function mapByEan(array $products): array
+    {
+        return array_combine(
+            array_map(function (Product $product) {
+                return $product->getEanCode();
+            }, $products),
+            $products
+        );
+    }
 }
