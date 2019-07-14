@@ -1,5 +1,7 @@
 # Symplex Small Business to Prestashop integration
 
+[![Build Status](https://travis-ci.org/athlan/symplex-prestashop.svg?branch=master)](https://travis-ci.org/athlan/symplex-prestashop)
+
 Tool provides integration of [Symplex Small Busines](http://symplex.com.pl) to [Prestashop](https://www.prestashop.com) integration:
 
 * Synchronize producs prices and quantites by EAN code

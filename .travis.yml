@@ -1,6 +1,16 @@
 language: php
+
+sudo: false
+
 php:
   - 7.3
 
-install: composer install
-script: vendor/bin/phpunit
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+install:
+  - composer install
+
+script:
+  - vendor/bin/phpunit
