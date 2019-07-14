@@ -1,5 +1,10 @@
 version: '3'
 
+volumes:
+    vol_db:
+    vol_prestashop_vendor:
+    vol_prestashop_var:
+
 services:
     php:
         build:
@@ -14,11 +19,14 @@ services:
             MYSQL_USER: prestashop
             MYSQL_PASSWORD: prestashop
             MYSQL_ROOT_PASSWORD: prestashop
+        volumes:
+          - vol_db:/var/lib/mysql
     prestashop:
         image: prestashop/prestashop:1.7
         depends_on:
           - db
         environment:
+            PS_DEV_MODE: 1
             DB_SERVER: db
             DB_USER: prestashop
             DB_PASSWD: prestashop
@@ -26,6 +34,14 @@ services:
             DB_PREFIX: ps_
             PS_DOMAIN: localhost:8080
             PS_INSTALL_AUTO: 1
-            PS_ERASE_DB: 1
+            PS_FOLDER_INSTALL: install-dev
+            PS_FOLDER_ADMIN: admin-dev
+            #PS_ERASE_DB: 1
+            ADMIN_MAIL: demo@prestashop.com
+            ADMIN_PASSWD: prestashop_demo
+        volumes:
+            - ./:/var/www/html/:delegated
+            - vol_prestashop_vendor:/var/www/html/vendor
+            - vol_prestashop_var:/var/www/html/var
         ports:
           - 8080:80
