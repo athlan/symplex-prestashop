@@ -8,6 +8,7 @@ use Athlan\SymplexPrestahop\Application\Product;
 use Athlan\SymplexPrestahop\Application\ProductsSource;
 use Doctrine\DBAL\Connection;
 use Iterator;
+use ArrayIterator;
 
 class PrestashopProductSource implements ProductsSource
 {
@@ -44,10 +45,10 @@ class PrestashopProductSource implements ProductsSource
             ->addSelect('pl.name AS name')
             ->addSelect('sav.quantity AS quantity')
             ->from($this->table('product'), 'p')
-            ->leftJoin($this->table('product_lang'), 'pl.id_product = p.id_product AND pl.id_lang = 1 AND pl.id_shop = 1', 'pl')
-            ->leftJoin($this->table('stock_available'), 'sav.id_product = p.id_product AND sav.id_product_attribute = 0 AND sav.id_shop = 1 AND sav.id_shop_group = 0', 'sav');
+            ->leftJoin('p', $this->table('product_lang'), 'pl', 'pl.id_product = p.id_product AND pl.id_lang = 1 AND pl.id_shop = 1')
+            ->leftJoin('p', $this->table('stock_available'), 'sav', 'sav.id_product = p.id_product AND sav.id_product_attribute = 0 AND sav.id_shop = 1 AND sav.id_shop_group = 0');
 
-        return $this->connection->project($qb, $qb->getParameters(), function ($row) {
+        $result = $this->connection->project($qb, $qb->getParameters(), function ($row) {
             return new Product(
                 $row['reference'],
                 $row['name'],
@@ -55,6 +56,7 @@ class PrestashopProductSource implements ProductsSource
                 (float) $row['quantity']
             );
         });
+        return new ArrayIterator($result);
     }
 
     private function table(string $string)
