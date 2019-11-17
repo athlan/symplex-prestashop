@@ -1,0 +1,46 @@
+#!/bin/bash
+
+usage="$(basename "$0") -t time -f file -- Waits until -f file is not being modified since -t seconds.
+Stops immediately if file not been modified since -t seconds
+
+where:
+    -t  amount of seconds file expected to not be modified
+    -f  file to watch
+"
+
+file=""
+min_time=""
+
+while getopts ':hf:t:' option; do
+  case "$option" in
+    h) echo "$usage"
+       exit
+       ;;
+    f) file=$OPTARG
+       ;;
+    t) min_time=$OPTARG
+       ;;
+    :) printf "missing argument for -%s\n" "$OPTARG" >&2
+       echo "$usage" >&2
+       exit 1
+       ;;
+   \?) printf "illegal option: -%s\n" "$OPTARG" >&2
+       echo "$usage" >&2
+       exit 1
+       ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+[[ -z "$file" ]] && echo "Mising -f option" && echo -e "\n$usage" && exit 1
+[[ -z "$min_time" ]] && echo "Mising -t option" && echo -e "\n$usage" && exit 1
+[[ ! -f "$file" ]] && echo "File $file does not exists" && exit 1
+
+while true; do
+    filemtime=`stat -c %Y $file`
+    currtime=`date +%s`
+
+    diff_sec=$(( (currtime - filemtime) ))
+
+    [[ $diff_sec -gt $min_time ]] && break;
+done
