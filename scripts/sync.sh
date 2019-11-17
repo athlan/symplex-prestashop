@@ -43,23 +43,25 @@ mkdir -p $reports_dir
 
 # Wait for file readiness, file cannot be modified since 10 sec
 echo "Waiting for file $file readiness"
-$basedir/bin/fmodwait -f $file -t 10
+bash $basedir/bin/fmodwait -f $file -t 10
 
 # Move file to process
 file_processing="$file.processing"
+file_processing_finished="$file.processed"
+
 mv $file $file_processing
 
 # Sync
 report_file="$reports_dir/sync-log.txt"
 echo "Sync report - $(date +"%Y-%m-%d %T")" > $report_file
-$basedir/bin/sync $file_processing >> $report_file
+php $basedir/bin/sync $file_processing >> $report_file
 
 # Generate mismapped report
 report_file="$reports_dir/mismapped-log.txt"
 echo "Mismapped report - $(date +"%Y-%m-%d %T")" > $report_file
-$basedir/bin/list-shop-mismapped $file_processing >> $report_file
+php $basedir/bin/list-shop-mismapped $file_processing >> $report_file
 
 # Complete
-rm $file_processing
+mv $file_processing $file_processing_finished
 
 echo "Done"
