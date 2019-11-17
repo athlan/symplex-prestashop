@@ -37,7 +37,7 @@ shift $((OPTIND - 1))
 [[ ! -f "$file" ]] && echo "File $file does not exists" && exit 1
 
 while true; do
-    filemtime=`stat -c %Y $file`
+    filemtime=`date -r $file +%s`
     currtime=`date +%s`
 
     diff_sec=$(( (currtime - filemtime) ))
