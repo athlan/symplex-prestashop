@@ -14,6 +14,10 @@ services:
     $productsRepository: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductsRepository'
     $shopProductsSource: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource'
 
+  Athlan\SymplexPrestahop\Application\ListShopMismappedProducts:
+    $productsRepository: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductsRepository'
+    $shopProductsSource: '@Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource'
+
   Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductSource:
 
   Athlan\SymplexPrestahop\Infra\Prestashop\PrestashopProductsRepository:

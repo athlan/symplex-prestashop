@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+use Athlan\SymplexPrestahop\Application\Product;
+use Athlan\SymplexPrestahop\Application\ListShopMismappedProducts;
+use Athlan\SymplexPrestahop\Application\ListShopMismappedProductsResults;
+
+$container = require __DIR__ . '/../src/Kernel.php';
+
+class Result implements ListShopMismappedProductsResults
+{
+
+    function productMismapped(Product $product)
+    {
+        echo $product->getName() . " mapped with unexisting ean: " . $product->getEanCode() . PHP_EOL;
+    }
+}
+
+$result = new Result();
+
+/* @var $command ListShopMismappedProducts */
+$command = $container->get(ListShopMismappedProducts::class);
+$command->getList($argv[1], $result);
